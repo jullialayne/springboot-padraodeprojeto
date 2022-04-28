@@ -2,8 +2,8 @@ package com.teste.myfirstwebapi.controller;
 
 import java.util.List;
 
-import com.teste.myfirstwebapi.model.Cliente;
-import com.teste.myfirstwebapi.repository.ClienteRepository;
+import com.teste.myfirstwebapi.model.Banco;
+import com.teste.myfirstwebapi.repository.BancoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,35 +16,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/banco")
+public class BancoController {
     
     @Autowired
-    private ClienteRepository repository;
+    private BancoRepository repository;
     
     @GetMapping()
-    public List<Cliente> getClientes(){
+    public List<Banco> getBancos(){
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Cliente getClienteOne(@PathVariable("id") Integer id){
+    public Banco getBancoOne(@PathVariable("id") Integer id){
         return repository.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCliente(@PathVariable("id") Integer id){
+    public void deleteBanco(@PathVariable("id") Integer id){
         repository.deleteById(id);
     }
 
     @PostMapping()
-    public void postCliente(@RequestBody Cliente cliente){
-        repository.save(cliente);
+    public void postBanco(@RequestBody Banco banco){
+        repository.save(banco);
     }
 
     @PutMapping()
-    public void putCliente(@RequestBody Cliente cliente){
-        repository.save(cliente);
+    public void putBanco(@RequestBody Banco banco){
+        repository.save(banco);
     }
+
 
 }

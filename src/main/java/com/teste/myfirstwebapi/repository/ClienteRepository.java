@@ -3,6 +3,7 @@ package com.teste.myfirstwebapi.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teste.myfirstwebapi.handler.CampoObrigatorioException;
 import com.teste.myfirstwebapi.model.Cliente;
 
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ClienteRepository {
     public void save(Cliente cliente){
+        if(cliente.getLogin()==null){
+            throw new CampoObrigatorioException("login");
+        }
+        if(cliente.getPassword()==null){
+            throw new CampoObrigatorioException("senha");
+        }
+
         if(cliente.getId()==null){
             System.out.println("SAVE - Recebendo o usuário na camada de repositório");
         }else{
@@ -25,20 +33,21 @@ public class ClienteRepository {
     public List<Cliente> findAll(){
         System.out.println("LIST - Listando os clientes do sistema");
         List<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente("juu", "123"));
-        clientes.add(new Cliente("la", "123"));
+        clientes.add(new Cliente("Jullia","juu", "123"));
+        clientes.add(new Cliente("Layne","la", "123"));
+        clientes.add(new Cliente("Jordanna","jo", "123"));
         return clientes;
 
     }
 
     public Cliente findById(Integer id){
         System.out.println(String.format("FIND/id - Recebendo o id: %d",id));
-        return new Cliente("juu","123");
+        return new Cliente("Jordanna","jo", "123");
     }
 
     public Cliente findByClienteName(String clientename){
         System.out.println(String.format("FIND/clientename - Recebendo o clientename: %s",clientename));
-        return new Cliente("juu","123");
+        return new Cliente("Jordanna","jo", "123");
     }
 
     
